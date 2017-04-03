@@ -67,6 +67,12 @@ createHovers = (index) ->
 for i in [0...hovers.length]
 	tooltips[i].visible = false
 	createHovers(i)
+
+
+hoverReport.onMouseOver ->
+	tooltipReport.placeBefore(moreDetails1)
+hoverReport.onMouseOut ->
+	tooltipReport.placeBefore(hoverReport)
 # Affordances
 createAffordances = (index) ->
 	affordances[index].onMouseOver ->
@@ -76,20 +82,7 @@ createAffordances = (index) ->
 
 for i in [0...affordances.length]
 	createAffordances(i)
-# Expansion
-
-cardBg = new Layer
-	backgroundColor: '#FFFFFF'
-# 	shadowX: 0
-# 	shadowY: 2
-# 	shadowBlur: 4
-# 	shadowSpread: 1
-# 	shadowColor: "rgba(0,0,0,0.13)"
-	borderRadius: '5px'
-	height: cardBG.height
-	width: cardBG.width
-	parent: cardBG
-
+#Cards
 cardBgShadow = new Layer
 	backgroundColor: 'transparent'
 	shadowX: 0
@@ -101,8 +94,8 @@ cardBgShadow = new Layer
 	height: cardBG.height
 	width: cardBG.width
 	parent: cardNormal
-	x: cardBg.x+5
-	y: cardBg.y
+	x: cardBG.x
+	y: cardBG.y
 
 
 cardBgEnterprise = new Layer
@@ -125,57 +118,53 @@ normalState = 0
 enterpriseState = 0
 
 moreDetails1.onClick ->
-	normalState = normalState + 400
-	cardBg.animate
-		height: cardBg.height + 400
+	normalState = normalState + 98
 	cardBgShadow.animate
-		height: cardBgShadow.height + 400
+		height: cardBgShadow.height + 98
 	plan2.animate
-		y: plan2.y + 400
+		y: plan2.y + 98
 	plan3.animate
-		y: plan3.y + 400
+		y: plan3.y + 98
 	bgBot.animate
-		y: bgBot.y + 400
+		y: bgBot.y + 98
 	info1Hider.animate
 		scaleY: 0
 	info1Gradient.animate
-		y: info1Gradient.y + 367
+		y: info1Gradient.y + 91
 		opacity: 0
 	btnCard.animate
-		y: btnCard.y + 400
+		y: btnCard.y + 98
 	freeTrialCopy.animate
-		y: freeTrialCopy.y + 400
+		y: freeTrialCopy.y + 98
 	moreDetails1.visible = false
 	lessDetails1.visible = true
 
 lessDetails1.onClick ->
-	normalState = normalState - 400
+	if cardBgShadow.isAnimating is true
+		return
+	normalState = normalState - 98
 	info1Gradient.opacity = 1
-	cardBg.animate
-		height: cardBg.height - 400
 	cardBgShadow.animate
-		height: cardBgShadow.height - 400
+		height: cardBgShadow.height - 98
 	plan2.animate
-		y: plan2.y - 400
+		y: plan2.y - 98
 	plan3.animate
-		y: plan3.y - 400
+		y: plan3.y - 98
 	bgBot.animate
-		y: bgBot.y - 400
+		y: bgBot.y - 98
 	info1Hider.animate
 		scaleY: 1
 	info1Gradient.animate
-		y: info1Gradient.y - 367
+		y: info1Gradient.y - 91
 	btnCard.animate
-		y: btnCard.y - 400
+		y: btnCard.y - 98
 	freeTrialCopy.animate
-		y: freeTrialCopy.y - 400
+		y: freeTrialCopy.y - 98
 	moreDetails1.visible = true
 	lessDetails1.visible = false
 
 moreDetails2.onClick ->
 	normalState = normalState + 142
-	cardBg.animate
-		height: cardBg.height + 142
 	cardBgShadow.animate
 		height: cardBgShadow.height + 142
 	plan3.animate
@@ -196,10 +185,10 @@ moreDetails2.onClick ->
 
 
 lessDetails2.onClick ->
+	if cardBgShadow.isAnimating is true
+		return
 	normalState = normalState - 142
 	info2Gradient.opacity = 1
-	cardBg.animate
-		height: cardBg.height - 142
 	cardBgShadow.animate
 		height: cardBgShadow.height - 142
 	plan3.animate
@@ -219,43 +208,41 @@ lessDetails2.onClick ->
 
 
 moreDetails3.onClick ->
-	normalState = normalState + 138
-	cardBg.animate
-		height: cardBg.height + 138
+	normalState = normalState + 360
 	cardBgShadow.animate
-		height: cardBgShadow.height + 138
+		height: cardBgShadow.height + 360
 	bgBot.animate
-		y: bgBot.y + 138
+		y: bgBot.y + 360
 	info3Hider.animate
 		scaleY: 0
 	info3Gradient.animate
-		y: info3Gradient.y + 131
+		y: info3Gradient.y + 367
 		opacity: 0
 	btnCard.animate
-		y: btnCard.y + 138
+		y: btnCard.y + 360
 	freeTrialCopy.animate
-		y: freeTrialCopy.y + 138
+		y: freeTrialCopy.y + 360
 	moreDetails3.visible = false
 	lessDetails3.visible = true
 
 
 lessDetails3.onClick ->
-	normalState = normalState - 138
+	if cardBgShadow.isAnimating is true
+		return
+	normalState = normalState - 360
 	info3Gradient.opacity = 1
-	cardBg.animate
-		height: cardBg.height - 138
 	cardBgShadow.animate
-		height: cardBgShadow.height - 138
+		height: cardBgShadow.height - 360
 	bgBot.animate
-		y: bgBot.y - 138
+		y: bgBot.y - 360
 	info3Hider.animate
 		scaleY: 1
 	info3Gradient.animate
-		y: info3Gradient.y - 131
+		y: info3Gradient.y - 367
 	btnCard.animate
-		y: btnCard.y - 138
+		y: btnCard.y - 360
 	freeTrialCopy.animate
-		y: freeTrialCopy.y - 138
+		y: freeTrialCopy.y - 360
 	moreDetails3.visible = true
 	lessDetails3.visible = false
 
@@ -263,8 +250,8 @@ lessDetails3.onClick ->
 cardEnterprise.visible = false
 
 enterpriseZone.onClick ->
-	cardNormal.visible = false
 	cardEnterprise.visible = true
+	cardNormal.visible = false
 	bgBot.y = bgBot.y + 250 + enterpriseState - normalState
 	freeTrialCopy.y = freeTrialCopy.y + 250 + enterpriseState - normalState
 	cardBgEnterprise.height = cardBGEnterprise.height + enterpriseState
@@ -274,7 +261,7 @@ normalZone.onClick ->
 	cardEnterprise.visible = false
 	bgBot.y = bgBot.y - 250 + normalState - enterpriseState
 	freeTrialCopy.y = freeTrialCopy.y - 250 + normalState - enterpriseState
-	cardBg.height = cardBG.height + normalState
+	cardBgShadow.height = cardBG.height + normalState
 
 enterpriseHider.originY = 1
 
