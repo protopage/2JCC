@@ -250,6 +250,8 @@ lessDetails3.onClick ->
 cardEnterprise.visible = false
 
 enterpriseZone.onClick ->
+	if cardEnterprise.visible is true
+		return
 	cardEnterprise.visible = true
 	cardNormal.visible = false
 	bgBot.y = bgBot.y + 250 + enterpriseState - normalState
@@ -257,6 +259,8 @@ enterpriseZone.onClick ->
 	cardBgEnterprise.height = cardBGEnterprise.height + enterpriseState
 
 normalZone.onClick -> 
+	if cardNormal.visible is true
+		return
 	cardNormal.visible = true
 	cardEnterprise.visible = false
 	bgBot.y = bgBot.y - 250 + normalState - enterpriseState
